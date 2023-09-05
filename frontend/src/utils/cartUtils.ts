@@ -5,7 +5,14 @@ export type CartState = {
     itemsPrice: string,
     shippingPrice: string,
     taxPrice: string,
-    totalPrice: string
+    totalPrice: string,
+    shippingAddress: {
+        address: string,
+        postalCode: string,
+        city: string,
+        country: string
+    }, 
+    paymentMethod: string
 }
 
 export const addDecimals = (num: number) => {
