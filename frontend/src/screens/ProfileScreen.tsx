@@ -45,7 +45,7 @@ const ProfileScreen = () => {
         dispatch(setCredentials(res));
         toast.success("Profile updated successfully");
 
-      } catch (e:any) {
+      } catch (e: any) {
         toast.error(e?.data?.message || e.error)
       }
 
@@ -108,7 +108,7 @@ const ProfileScreen = () => {
             </thead>
               <tbody>
                 {orders.map((order:Order) => 
-                  <tr>
+                  <tr key={order._id}>
                     <td>{order._id}</td>
                     <td>{order.createdAt.toString().substring(0,10)}</td>
                     <td>${order.totalPrice}</td>
