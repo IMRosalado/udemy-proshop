@@ -11,7 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node dist/seeder.js",
     "data:destroy": "node dist/seeder.js -d",
-    "build:prod": "npm install && npm install --prefix frontend && npm run build --prefix frontend && npx tsc && copyfiles -E -V frontend/build/**/* dist"
+    "build:prod": "npm install && npm install --prefix frontend && npm run build --prefix frontend && npx tsc"
   },
   "author": "",
   "license": "ISC",
