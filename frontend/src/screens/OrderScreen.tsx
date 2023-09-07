@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
-import { useGetOrderDetailsQuery , usePayOrderMutation, useGetPayPalClientIdQuery, ordersApiSlice, useDeliverOrderMutation } from "../slices/ordersApiSlice"
+import { useGetOrderDetailsQuery , usePayOrderMutation, useGetPayPalClientIdQuery, useDeliverOrderMutation } from "../slices/ordersApiSlice"
 import { PayPalButtons, usePayPalScriptReducer, SCRIPT_LOADING_STATE } from "@paypal/react-paypal-js"
 import {CreateOrderData, CreateOrderActions, OnApproveActions, OnApproveData, } from "@paypal/paypal-js"
 import { toast } from 'react-toastify'
@@ -27,17 +27,6 @@ const OrderScreen = () => {
 
   const { userInfo } = useSelector<any, AuthState>((state) => state.auth)
 
-  const onApproveTest = async () => {
-    try {
-      await payOrder({orderId: orderId||"", details: {id:"",status:"Paid"}})
-      refetch()
-      toast.success("Payment Successful")
-    } catch (error:any) {
-      refetch()
-      toast.error(error?.data?.message || error.message)
-      
-    }
-  }
 
   const createOrder = (data:CreateOrderData, actions:CreateOrderActions):Promise<string> => {
     return actions.order.create({

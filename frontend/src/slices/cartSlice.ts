@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Product } from "../models/Product";
 import { OrderItem } from '../models/OrderItem';
 import { CartState, updateCart } from "../utils/cartUtils";
 

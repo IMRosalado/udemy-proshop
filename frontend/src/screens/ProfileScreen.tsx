@@ -5,7 +5,6 @@ import { useProfileUpdateMutation } from "../slices/usersApiSlice"
 import { AuthState, setCredentials } from "../slices/authSlice"
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux"
-import express from 'express';
 import Loader from "../components/Loader"
 import { useGetMyOrdersQuery } from "../slices/ordersApiSlice"
 import Message from "../components/Message"

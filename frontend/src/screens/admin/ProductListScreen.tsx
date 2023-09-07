@@ -5,12 +5,17 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { useCreateProductMutation, useDeleteProductMutation, useGetProductsQuery } from "../../slices/productsApiSlice";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
+import Paginate from "../../components/Paginate";
 
 const ProductListScreen = () => {
 
-  const { data:products, isLoading, error, refetch} = useGetProductsQuery(null);
+  const { pageNumber} = useParams();
+
+  const { data, isLoading, error, refetch} = useGetProductsQuery({ pageNumber: pageNumber || "1"});
   const [createProduct, { isLoading: isLoadingCreate}] = useCreateProductMutation();
   const [deleteProduct, { isLoading: isLoadingDelete}] = useDeleteProductMutation();
+  
 
   const deleteHandler = async (productId:string) => {
     if (window.confirm("Are you sure you want to delete product?")) {
@@ -57,7 +62,7 @@ const ProductListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {products && products.map((product) => 
+              {data && data.products && data.products.map((product) => 
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
@@ -75,6 +80,7 @@ const ProductListScreen = () => {
             </tbody>
 
           </Table>
+          <Paginate pages={data?.pages||1} currentPage={data?.page||1} isAdmin={true}/>
         </>
       ) }
     </>

@@ -9,4 +9,14 @@ export type Product = {
   countInStock: number,
   rating?: number,
   numReviews?: number,
+  reviews: Review[]
+}
+
+type Review = {
+  _id: string,
+  user: string,
+  name: string,
+  rating: number,
+  comment: string,
+  createdAt: Date
 }

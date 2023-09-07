@@ -1,10 +1,8 @@
 import { Form, Button } from "react-bootstrap";
 import Message from "../../components/Message";
 import { toast } from "react-toastify";
-import { useUpdateProductMutation, useGetProductDetailsQuery, useUploadProductImageMutation } from "../../slices/productsApiSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
-import { LinkContainer } from "react-router-bootstrap";
 import FormContainer from "../../components/FormContainer";
 import Loader from "../../components/Loader";
 import { useGetUserByIdQuery, useUpdateUserMutation } from "../../slices/usersApiSlice";

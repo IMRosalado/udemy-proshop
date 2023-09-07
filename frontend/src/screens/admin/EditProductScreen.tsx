@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { useUpdateProductMutation, useGetProductDetailsQuery, useUploadProductImageMutation } from "../../slices/productsApiSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
-import { LinkContainer } from "react-router-bootstrap";
 import FormContainer from "../../components/FormContainer";
 import Loader from "../../components/Loader";
 
@@ -24,7 +23,7 @@ const EditProductScreen = () => {
   
   const [ updateProduct, { isLoading: isLoadingUpdate }] = useUpdateProductMutation();
 
-  const [ uploadProductImage, { isLoading: isLoadingUpload }] = useUploadProductImageMutation();
+  const [ uploadProductImage] = useUploadProductImageMutation();
 
   const navigate = useNavigate();
 

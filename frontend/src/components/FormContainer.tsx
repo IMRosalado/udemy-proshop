@@ -5,7 +5,7 @@ const FormContainer = ({children}: {children: ReactNode}) => {
   return (
     <Container>
       <Row className="justify-content-md-center">
-        <Col>{children}</Col>
+        <Col md={10}>{children}</Col>
       </Row>
     </Container>
   )
