@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux';
 import { AuthState } from "../slices/authSlice"
 import { useEffect } from 'react';
+import { formatFetchError } from "../utils/errorUtils"
 
 const OrderScreen = () => {
   const { id: orderId } = useParams()
@@ -45,7 +46,7 @@ const OrderScreen = () => {
   const onApprove = (data:OnApproveData, actions:OnApproveActions):Promise<void> => {
     return actions.order?.capture().then(async function (details) {
       try {
-        await payOrder({orderId:orderId||"", details});
+        await payOrder({orderId:orderId||"", details}).unwrap();
         refetch()
         toast.success("Payment Successful")
         
@@ -94,7 +95,7 @@ const OrderScreen = () => {
     }
   }
 
-  return isLoading ? <Loader/> : error ? <Message variant="danger">{error.toString()}</Message> : order ?
+  return isLoading ? <Loader/> : error ? <Message variant="danger">{formatFetchError(error)}</Message> : order ?
   <>
     <h1>Order {order._id}</h1>
     <Row>

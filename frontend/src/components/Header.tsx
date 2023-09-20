@@ -9,6 +9,7 @@ import { useLogoutMutation } from "../slices/usersApiSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SearchBox from "./SearchBox";
+import { resetCart } from "../slices/cartSlice";
 
 export const Header = () => {
 
@@ -24,6 +25,7 @@ export const Header = () => {
     try {
       await logoutApicall().unwrap();
       dispatch(logout({}));
+      dispatch(resetCart());
       navigate('/login')
     } catch (error:any) {
       toast.error(error.data.message || error.error);

@@ -9,7 +9,7 @@ const Product = ({product}:ProductProps) => {
   return (
     <Card className="my-3 p-3 rounded" >
       <Link to={`/product/${product._id}`}>
-        <Card.Img src={product.image} variant="top"/>
+        <Card.Img src={product.image.replaceAll('\\','/')} variant="top"/>
       </Link>
       <Card.Body>
         <Link to={`/product/${product._id}`}>

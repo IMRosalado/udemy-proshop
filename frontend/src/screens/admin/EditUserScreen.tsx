@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import FormContainer from "../../components/FormContainer";
 import Loader from "../../components/Loader";
 import { useGetUserByIdQuery, useUpdateUserMutation } from "../../slices/usersApiSlice";
+import { formatFetchError } from "../../utils/errorUtils";
 
 
 const EditUserScreen = () => {
@@ -41,7 +42,7 @@ const EditUserScreen = () => {
       const result = await updateUser(updatedUser);
 
       if ("error" in result && result.error)  {
-        toast.error(result.error.toString());
+        toast.error(formatFetchError(result.error));
       } else {
         toast.success("User Updated");
         navigate("/admin/users");
@@ -59,7 +60,7 @@ const EditUserScreen = () => {
         <h1>Edit User</h1>
         { isLoadingUpdate && <Loader/> }
 
-        { isLoading ? <Loader/> : error ? (<Message variant="danger">{error.toString()}</Message>) : (
+        { isLoading ? <Loader/> : error ? (<Message variant="danger">{formatFetchError(error)}</Message>) : (
             <Form onSubmit={submitHandler}>
               <Form.Group controlId="name" className="my-2">
                 <Form.Label>Name</Form.Label>

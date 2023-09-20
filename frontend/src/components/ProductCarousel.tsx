@@ -3,11 +3,12 @@ import { useGetTopProductsQuery } from "../slices/productsApiSlice"
 import Loader from "./Loader";
 import Message from "./Message";
 import { Link } from "react-router-dom";
+import { formatFetchError } from "../utils/errorUtils";
 
 const ProductCarousel = () => {
 
   const {data: products, isLoading, error} = useGetTopProductsQuery(null);
-  return isLoading? <Loader/> : error? <Message variant="danger">{error.toString()}</Message>
+  return isLoading? <Loader/> : error? <Message variant="danger">{formatFetchError(error)}</Message>
     : products ? (
       <Carousel pause="hover" className="bg-primary mb-4">
         {products.map(product => (

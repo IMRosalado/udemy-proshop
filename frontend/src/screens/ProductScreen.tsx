@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AuthState } from "../slices/authSlice";
 import Meta from "../components/Meta";
+import { formatFetchError } from "../utils/errorUtils";
 
 const ProductScreen = () => {
   const {id: productId} = useParams();
@@ -32,7 +33,6 @@ const ProductScreen = () => {
     dispatch(addToCart({...product, qty}))
     navigate('/cart');
   }
-
   const createReviewHandler = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -56,7 +56,7 @@ const ProductScreen = () => {
   return (
     <>
       { isLoading ? <Loader/>
-      : error? (<Message variant="danger">{error.toString()}</Message>)
+      : error? (<Message variant="danger">{formatFetchError(error)}</Message>)
       :(<>
         <Link className="btn btn-light my-3" to="/">
           Go Back

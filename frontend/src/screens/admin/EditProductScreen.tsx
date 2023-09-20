@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import FormContainer from "../../components/FormContainer";
 import Loader from "../../components/Loader";
+import { formatFetchError } from "../../utils/errorUtils";
 
 
 const EditProductScreen = () => {
@@ -56,7 +57,7 @@ const EditProductScreen = () => {
       const result = await updateProduct(updatedProduct);
 
       if ("error" in result && result.error)  {
-        toast.error(result.error.toString());
+        toast.error(formatFetchError(result.error));
       } else {
         toast.success("Product Updated");
         navigate("/admin/products");
@@ -91,7 +92,7 @@ const EditProductScreen = () => {
         <h1>Edit Product</h1>
         { isLoadingUpdate && <Loader/> }
 
-        { isLoading ? <Loader/> : error ? (<Message variant="danger">{error.toString()}</Message>) : (
+        { isLoading ? <Loader/> : error ? (<Message variant="danger">{formatFetchError(error)}</Message>) : (
             <Form onSubmit={submitHandler}>
               <Form.Group controlId="name" className="my-2">
                 <Form.Label>Name</Form.Label>

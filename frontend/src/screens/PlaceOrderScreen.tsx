@@ -9,6 +9,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { useCreateOrderMutation } from '../slices/ordersApiSlice';
 import { clearCartItems } from '../slices/cartSlice';
+import { formatFetchError } from '../utils/errorUtils';
 
 
 const PlaceOrderScreen = () => {
@@ -112,7 +113,7 @@ const PlaceOrderScreen = () => {
               </Row>
             </ListGroup.Item>
             <ListGroup.Item>
-              { error && <Message variant="danger">{error.toString()}</Message>}
+              { error && <Message variant="danger">{formatFetchError(error)}</Message>}
             </ListGroup.Item>
             <ListGroup.Item>
               <Button type="button" className="btn-block" disabled={cart.cartItems.length === 0} onClick={placeOrderHandler}> Place Order</Button>

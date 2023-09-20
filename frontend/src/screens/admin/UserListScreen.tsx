@@ -6,6 +6,7 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { User } from "../../models/User";
 import { toast } from "react-toastify";
+import { formatFetchError } from "../../utils/errorUtils";
 
 const UserListScreen = () => {
 
@@ -30,7 +31,7 @@ const UserListScreen = () => {
     <>
       <h1>Users</h1>
       {isLoadingDelete && <Loader/>}
-      { isLoading ? <Loader/> : error? <Message variant="danger">{error.toString()}</Message> : (
+      { isLoading ? <Loader/> : error? <Message variant="danger">{formatFetchError(error)}</Message> : (
         <Table striped hover responsive className="table-sm">
           <thead>
             <tr>

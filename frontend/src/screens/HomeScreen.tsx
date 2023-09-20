@@ -6,11 +6,12 @@ import Message from "../components/Message";
 import { Link, useParams } from "react-router-dom";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
+import { formatFetchError } from "../utils/errorUtils";
 
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams()
   
-  const { data, isLoading, isError } = useGetProductsQuery({pageNumber: pageNumber||"1", keyword:keyword||""}); 
+  const { data, isLoading, error } = useGetProductsQuery({pageNumber: pageNumber||"1", keyword:keyword||""}); 
   
   return (
     <>
@@ -18,7 +19,7 @@ const HomeScreen = () => {
         <ProductCarousel/>
       )}
       { isLoading ? (<Loader/>)
-      : isError? <Message variant="danger">(error.data.message || error.error)</Message>
+      : error? <Message variant="danger">{formatFetchError(error)}</Message>
       :(<>
       <h1>Latest Products</h1>
       <Row>
